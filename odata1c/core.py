@@ -91,9 +91,17 @@ class InfoBase:
 
         return json.loads(r.text)
 
-    def new_document(self,  name, data, posting_mode):
-        # TODO new_document
-
+    def new_document(self, name, data, posting_mode=PostingMode.UNPOST):
         # Because Posting = True does not create records in registers
-        if data['Posting'] == True:
+        if ('Posting' in data) and (data['Posting'] == True):
             raise ValueError('Do not pass the "Posting" field')
+        if not 'Date' in data:
+            raise ValueError('Date value cannot be an empty date')
+
+        url = self._full_url.format(obj='Document_' + name)
+        r = requests.post(url, auth=self._auth,
+                          headers=self._headers, data=json.dumps(data))
+        if r.status_code != 201:
+            raise Exception(r.text)
+
+        return json.loads(r.text)
