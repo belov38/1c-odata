@@ -70,8 +70,17 @@ class InfoBase:
         return json.loads(r.text)
 
     def post_document(self, name, guid, posting_mode):
-        # TODO post_document
-        pass
+        obj = "Document_{}(guid'{}')/Post".format(name, guid)
+        url = self._full_url.format(obj=obj)
+        if posting_mode == PostingMode.OPER:
+            url = url + '&PostingModeOperational=false'
+        elif posting_mode == PostingMode.POST:
+            url = url + '&PostingModeOperational=true'
+        else:
+            raise ValueError('Use unpost_document() for unposting')
+        r = requests.post(url, auth=self._auth, headers=self._headers)
+        if(r.status_code != 200):
+            raise Exception(r.text)
 
     def unpost_document(self, name, data):
         # TODO unpost_document
@@ -104,4 +113,9 @@ class InfoBase:
         if r.status_code != 201:
             raise Exception(r.text)
 
-        return json.loads(r.text)
+        new_doc = json.loads(r.text)
+
+        if posting_mode != PostingMode.UNPOST:
+            self.post_document(name, new_doc['Ref_Key'], posting_mode)
+
+        return new_doc
