@@ -54,7 +54,7 @@ class InfoBase:
             raise Exception(r.text)
         return json.loads(r.text)['value']
 
-    # TODO documents $count 
+    # TODO documents $count
     # TODO documents $inlinecount
     # TODO documents $orderby
     # TODO documents $expand
@@ -77,12 +77,19 @@ class InfoBase:
         # TODO unpost_document
         pass
 
-    def edit_document(self, name, data):
-        # TODO edit_document (HTTP PATCH)
-
+    # TODO Check whether document changes register records (rePosted)?
+    def edit_document(self, name, guid, data):
         # Because Posting = True does not create records in registers
         if 'Posting' in data:
             raise ValueError('Do not pass the "Posting" field')
+        obj = "Document_{}(guid'{}')".format(name, guid)
+        url = self._full_url.format(obj=obj)
+        r = requests.patch(url, auth=self._auth,
+                           headers=self._headers, data=json.dumps(data))
+        if(r.status_code != 200):
+            raise Exception(r.text)
+
+        return json.loads(r.text)
 
     def new_document(self,  name, data, posting_mode):
         # TODO new_document
