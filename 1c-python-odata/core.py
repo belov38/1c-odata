@@ -1,11 +1,13 @@
 import json
+
 import requests
+
+from postingmode import PostingMode
 
 
 class InfoBase:
     server: str
     infobase: str
-    _full_url: str
     _auth: str
     _headers = {
         'Content-Type': 'application/json',
@@ -19,7 +21,7 @@ class InfoBase:
 
         self._full_url = server + infobase + \
             '/odata/standard.odata/{obj}?$format=json'
-        self._auth = requests.auth.HTTPBasicAuth('IBelov', '1722199')
+        self._auth = requests.auth.HTTPBasicAuth(username, password)
 
     def metadata(self):
         url = self._full_url.format(obj='')
@@ -49,5 +51,31 @@ class InfoBase:
 
         r = requests.get(url, auth=self._auth, headers=self._headers)
         if(r.status_code != 200):
-            raise Exception
+            raise Exception(r.text)
         return json.loads(r.text)['value']
+
+    def get_document(self, guid):
+        # TODO get_document
+        pass
+
+    def post_document(self, name, guid, posting_mode):
+        # TODO post_document
+        pass
+
+    def unpost_document(self, name, data):
+        # TODO unpost_document
+        pass
+
+    def edit_document(self, name, data):
+        # TODO edit_document (HTTP PATCH)
+
+        # Because Posting = True does not create records in registers
+        if 'Posting' in data:
+            raise ValueError('Do not pass the "Posting" field')
+
+    def new_document(self, name, data, posting_mode):
+        # TODO new_document
+
+        # Because Posting = True does not create records in registers
+        if data['Posting'] == True:
+            raise ValueError('Do not pass the "Posting" field')
