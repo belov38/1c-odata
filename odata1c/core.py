@@ -54,9 +54,20 @@ class InfoBase:
             raise Exception(r.text)
         return json.loads(r.text)['value']
 
-    def get_document(self, guid):
-        # TODO get_document
-        pass
+    # TODO documents $count 
+    # TODO documents $inlinecount
+    # TODO documents $orderby
+    # TODO documents $expand
+
+    def get_document(self, name, guid, select=None):
+        obj = "Document_{}(guid'{}')".format(name, guid)
+        url = self._full_url.format(obj=obj)
+        _url_select = self._make_url_part('select', select, str)
+        url = url + _url_select
+        r = requests.get(url, auth=self._auth, headers=self._headers)
+        if(r.status_code != 200):
+            raise Exception(r.text)
+        return json.loads(r.text)
 
     def post_document(self, name, guid, posting_mode):
         # TODO post_document
