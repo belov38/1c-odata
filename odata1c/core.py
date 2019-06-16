@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from postingmode import PostingMode
+from odata1c.postingmode import PostingMode
 
 
 class InfoBase:
@@ -73,7 +73,7 @@ class InfoBase:
         if 'Posting' in data:
             raise ValueError('Do not pass the "Posting" field')
 
-    def new_document(self, name, data, posting_mode):
+    def new_document(self,  name, data, posting_mode):
         # TODO new_document
 
         # Because Posting = True does not create records in registers
