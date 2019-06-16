@@ -82,11 +82,15 @@ class InfoBase:
         if(r.status_code != 200):
             raise Exception(r.text)
 
-    def unpost_document(self, name, data):
-        # TODO unpost_document
-        pass
+    def unpost_document(self, name, guid):
+        obj = "Document_{}(guid'{}')/Unpost".format(name, guid)
+        url = self._full_url.format(obj=obj)
+        r = requests.post(url, auth=self._auth, headers=self._headers)
+        if(r.status_code != 200):
+            raise Exception(r.text)
 
     # TODO Check whether document changes register records (rePosted)?
+
     def edit_document(self, name, guid, data):
         # Because Posting = True does not create records in registers
         if 'Posting' in data:
