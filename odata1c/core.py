@@ -123,3 +123,31 @@ class InfoBase:
             self.post_document(name, new_doc['Ref_Key'], posting_mode)
 
         return new_doc
+
+    # def new_catalog(self):
+    #     # TODO new_catalog
+    #     pass
+
+    # def edit_catalog(self):
+    #     # TODO edit_catalog
+    #     pass
+
+    # def get_catalog(self):
+    #     # TODO get_catalog
+    #     pass
+
+    # def get_catalogs(self):
+    #     # TODO get_catalogs
+    #     pass
+
+    # def InformationRegister_slicelast(self):
+    #     # TODO InformationRegister_slicelast
+    #     pass
+
+    # def AccountingRegister_balance(self):
+    #     # TODO AccountingRegister_balance
+    #     pass
+
+    # def AccumulationRegister_balance(self):
+    #     # TODO AccumulationRegister_balance
+    #     pass
