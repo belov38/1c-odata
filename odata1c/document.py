@@ -10,19 +10,20 @@ from odata1c.utils import make_url_part
 class Document:
     infobase: Infobase
     docname: str
+    url: str
 
     def __init__(self, infobase, docname):
         self.infobase = infobase
         self.docname = docname
+        self.url = self.infobase._full_url.format(obj='Document_'+self.docname)
 
     def query(self, top=None, skip=None, select=None, odata_filter=None):
-        url = self.infobase._full_url.format(obj='Document_'+self.docname)
         _url_top = make_url_part('top', top, int)
         _url_skip = make_url_part('skip', skip, int)
         _url_select = make_url_part('select', select, str)
         _url_filter = make_url_part('filter', odata_filter, str)
 
-        url = url + _url_top + _url_skip + _url_select + _url_filter
+        url = self.url + _url_top + _url_skip + _url_select + _url_filter
 
         r = requests.get(url, auth=self.infobase._auth,
                          headers=self.infobase._headers)
@@ -89,8 +90,7 @@ class Document:
         if not 'Date' in data:
             raise ValueError('Date value cannot be an empty date')
 
-        url = self.infobase._full_url.format(obj='Document_' + self.docname)
-        r = requests.post(url, auth=self.infobase._auth,
+        r = requests.post(self.url, auth=self.infobase._auth,
                           headers=self.infobase._headers, data=json.dumps(data))
         if r.status_code != 201:
             raise Exception(r.text)
