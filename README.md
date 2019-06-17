@@ -15,7 +15,9 @@ user.query() # get all
 user.query(top=5)
 user.query(top=5, skip=2)
 user.query(select='Description, DeletionMark')
-f="DeletionMark eq false" # Use singl quotes for strings!
+
+# Use singl quotes for strings!
+f = "(Description eq 'IvanPetrov') and (DeletionMark eq false)"
 user.query(odata_filter=f)
 
 new = {'Description':'Новый пользователь','Комментарий':'hello odata'}
