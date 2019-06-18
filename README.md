@@ -2,11 +2,11 @@
 1C v8 OData wrapper
 
 ```python
-from odata1c.core import Infobase
-from odata1c.postingmode import PostingMode
+from odata1cw.core import Infobase
+from odata1cw.postingmode import PostingMode
 from datetime import datetime
-from odata1c.document import Document
-from odata1c.catalog import Catalog
+from odata1cw.document import Document
+from odata1cw.catalog import Catalog
 
 connection = Infobase('http://myserver:port/','Infobase1','User','Password')
 
