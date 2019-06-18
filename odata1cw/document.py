@@ -2,9 +2,9 @@ import json
 
 import requests
 
-from odata1c.core import Infobase
-from odata1c.postingmode import PostingMode
-from odata1c.utils import make_url_part
+from odata1cw.core import Infobase
+from odata1cw.postingmode import PostingMode
+from odata1cw.utils import make_url_part
 
 
 class Document:
