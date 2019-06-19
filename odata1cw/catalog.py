@@ -14,14 +14,6 @@ class Catalog:
         self.catname = catname
         self.url = self.infobase._full_url.format(obj='Catalog_'+self.catname)
 
-    # def new_catalog(self):
-    #     # TODO new_catalog
-    #     pass
-
-    # def edit_catalog(self):
-    #     # TODO edit_catalog
-    #     pass
-
     def get(self, guid, select=None):
         obj = "Catalog_{}(guid'{}')".format(self.catname, guid)
         url = self.infobase._full_url.format(obj=obj)
