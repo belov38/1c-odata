@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="odata1cw",
-    version="0.0.2",
+    version="0.0.3",
     author="Ilia Belov",
     author_email="belov.penrose@gmail.com",
     description="1C-Odata wrapper",
