@@ -1,5 +1,6 @@
 # 1c-odata
 1C v8 OData wrapper
+V8.1c.ru
 
 ```python
 from odata1cw.core import Infobase
