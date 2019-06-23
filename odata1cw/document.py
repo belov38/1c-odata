@@ -35,13 +35,13 @@ class Document:
     # TODO documents $count
     # TODO documents $inlinecount
     # TODO documents $orderby
+    # TODO documents $expand
 
-    def get(self, guid, select=None, expand=None):
+    def get(self, guid, select=None):
         obj = "Document_{}(guid'{}')".format(self.docname, guid)
         url = self.infobase._full_url.format(obj=obj)
         _url_select = make_url_part('select', select, str)
-        _url_expand = make_url_part('expand', expand, str)
-        url = url + _url_select + _url_expand
+        url = url + _url_select
         r = requests.get(url, auth=self.infobase._auth,
                          headers=self.infobase._headers)
         if(r.status_code != 200):
