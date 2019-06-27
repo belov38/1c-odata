@@ -29,12 +29,9 @@ class InformationRegister:
         return json.loads(r.text)['value']
 
     def slice_last(self, **kwargs):
-        select_value = kwargs.get('select')
-        _url_select = make_url_part('select', select_value, str)
-        orderby_value = kwargs.get('orderby')
-        _url_orderby = make_url_part('orderby', orderby_value, str)
-        expand_value = kwargs.get('expand')
-        _url_expand = make_url_part('expand', expand_value, str)
+        _url_select = make_url_part('select', kwargs.get('select'), str)
+        _url_orderby = make_url_part('orderby', kwargs.get('orderby'), str)
+        _url_expand = make_url_part('expand', kwargs.get('expand'), str)
         period_value = '' if kwargs.get('period') is None else kwargs.get('period')
 
         full_url = (self.infobase._full_url.format(
