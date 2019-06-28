@@ -12,11 +12,11 @@ cpl = Document(connection, 'Пользователи')
 users = cpl.query(top=3)
 print(users)
 
-# example slise last expand='Auto',
+# example slise last 
 inforeg = InformationRegister(connection, 'OdometerReadings')
 period_value = f"Period = datetime'{datetime.now().isoformat()}'"
 guid='b4199e50-4510-11e9-90ec-00155d580419'
 condition_value=f"Condition='Auto_Key eq guid'{guid}''"
 res = inforeg.slice_last(
-    period=period_value,condition=condition_value,select="Reading", orderby="Reading desc", )
+    period=period_value,condition=condition_value,select="Reading", orderby="Reading desc",expand='Auto',)
 print(res)
