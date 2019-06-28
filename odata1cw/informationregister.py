@@ -33,9 +33,10 @@ class InformationRegister:
         _url_orderby = make_url_part('orderby', kwargs.get('orderby'), str)
         _url_expand = make_url_part('expand', kwargs.get('expand'), str)
         period_value = '' if kwargs.get('period') is None else kwargs.get('period')
+        condition_value = '' if kwargs.get('condition') is None else kwargs.get('condition')
 
         full_url = (self.infobase._full_url.format(
-            obj='InformationRegister_'+self.regname+f'/SliceLast({period_value})'))+f'{_url_select}{_url_orderby}{_url_expand}'
+            obj='InformationRegister_'+self.regname+f'/SliceLast({period_value},{condition_value})'))+f'{_url_select}{_url_orderby}{_url_expand}'
 
         r = requests.get(full_url, auth=self.infobase._auth,
                          headers=self.infobase._headers)
