@@ -12,7 +12,7 @@ cpl = Document(connection, 'Пользователи')
 users = cpl.query(top=3)
 print(users)
 
-# example slise last 
+# example slice last 
 inforeg = InformationRegister(connection, 'OdometerReadings')
 period_value = f"Period = datetime'{datetime.now().isoformat()}'"
 guid='b4199e50-4510-11e9-90ec-00155d580419'
