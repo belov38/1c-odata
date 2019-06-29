@@ -42,4 +42,4 @@ class InformationRegister:
                          headers=self.infobase._headers)
         if(r.status_code != 200):
             raise Exception(r.text)
-        return json.loads(r.text)    
+        return json.loads(r.text)['value']    
