@@ -28,12 +28,12 @@ class InformationRegister:
             raise Exception(r.text)
         return json.loads(r.text)['value']
 
-    def slice_last(self, **kwargs):
-        _url_select = make_url_part('select', kwargs.get('select'), str)
-        _url_orderby = make_url_part('orderby', kwargs.get('orderby'), str)
-        _url_expand = make_url_part('expand', kwargs.get('expand'), str)
-        period_value = '' if kwargs.get('period') is None else kwargs.get('period')
-        condition_value = '' if kwargs.get('condition') is None else kwargs.get('condition')
+    def slice_last(self, period=None, condition=None, select=None, orderby=None, expand=None):
+        _url_select = make_url_part('select', select, str)
+        _url_orderby = make_url_part('orderby', orderby, str)
+        _url_expand = make_url_part('expand', expand, str)
+        period_value = '' if period is None else period
+        condition_value = '' if condition is None else condition
 
         full_url = (self.infobase._full_url.format(
             obj='InformationRegister_'+self.regname+f'/SliceLast({period_value},{condition_value})'))+f'{_url_select}{_url_orderby}{_url_expand}'
@@ -42,4 +42,4 @@ class InformationRegister:
                          headers=self.infobase._headers)
         if(r.status_code != 200):
             raise Exception(r.text)
-        return json.loads(r.text)['value']    
+        return json.loads(r.text)['value']
