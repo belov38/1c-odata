@@ -1,4 +1,9 @@
 # 1c-odata
+
+## Установка
+pip install odata1cw
+
+## Пример
 1C v8 OData wrapper
 V8.1c.ru
 
